@@ -4,7 +4,7 @@ Donate link: http://red8interactive.com/
 Tags: tracking, analytics, scripts
 Requires at least: 3.0.1
 Tested up to: 3.4
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -41,6 +41,9 @@ On the "Existing" tab, simply click and drag the script to the new position you 
 
 == Changelog ==
 
+= 1.0.4 =
+* Fixed plugin URI
+
 = 1.0.3 =
 * Fixes redirect issue
 
@@ -54,6 +57,9 @@ On the "Existing" tab, simply click and drag the script to the new position you 
 * Initial plugin release
 
 == Upgrade Notice ==
+
+= 1.0.4 =
+Fixed plugin URI
 
 = 1.0.3 =
 Fixes redirect issue
