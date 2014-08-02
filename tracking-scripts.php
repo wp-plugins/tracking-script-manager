@@ -3,7 +3,7 @@
 	* Plugin Name: Tracking Script Manager
 	* Plugin URI: http://red8interactive.com
 	* Description: A plugin that allows you to add tracking scripts to your site.
-	* Version: 1.0.2
+	* Version: 1.0.3
 	* Author: Red8 Interactive
 	* Author URI: http://red8interactive.com
 	* License: GPL2
@@ -263,7 +263,7 @@
 					update_option(WP_FOOTER_TRACKING_SCRIPT, serialize($footer_scripts));
 				}
 				
-				wp_redirect(get_admin_url().'admin.php?page=tracking-scripts/tracking-scripts.php&tab=existing');
+				wp_redirect(get_admin_url().'admin.php?page=tracking-script-manager/tracking-scripts.php&tab=existing');
 				exit();
 			}
 			
@@ -338,7 +338,7 @@
 				update_option(WP_HEADER_TRACKING_SCRIPT, serialize($header_scripts));
 				update_option(WP_FOOTER_TRACKING_SCRIPT, serialize($footer_scripts));
 				
-				wp_redirect(get_admin_url().'admin.php?page=tracking-scripts/tracking-scripts.php&tab=existing');
+				wp_redirect(get_admin_url().'admin.php?page=tracking-script-manager/tracking-scripts.php&tab=existing');
 				exit();
 			}	
 			
