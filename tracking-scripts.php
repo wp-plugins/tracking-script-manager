@@ -1,9 +1,9 @@
 <?php
 	/**
-	* Plugin Name: Tracking Scripts
+	* Plugin Name: Tracking Script Manager
 	* Plugin URI: http://red8interactive.com
 	* Description: A plugin that allows you to add tracking scripts to your site.
-	* Version: 1.0
+	* Version: 1.0.2
 	* Author: Red8 Interactive
 	* Author URI: http://red8interactive.com
 	* License: GPL2
@@ -115,7 +115,7 @@
 				echo '<h2 class="nav-tab-wrapper">';
 				foreach($tabs as $tab => $name) {
 					$class = ($tab == $current) ? ' nav-tab-active' : '';
-					echo "<a class='nav-tab$class' href='?page=tracking-scripts/tracking-scripts.php&tab=$tab'>$name</a>";
+					echo "<a class='nav-tab$class' href='?page=tracking-script-manager/tracking-scripts.php&tab=$tab'>$name</a>";
 				}
 				echo '</h2>';
 			}
@@ -217,6 +217,8 @@
 				wp_enqueue_style('tracking-scripts-main');
 				
 				wp_enqueue_script( 'tracking_script_js', plugin_dir_url(__FILE__) . '/js/main.js', array(), '', true );
+				
+				
 			}
 			
 			
