@@ -8,7 +8,7 @@ Stable tag: 1.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Easily manage the tracking codes and scripts you wish to have in your WordPress website's header or footer; add, update, reorder, delete, as required.
+Easily manage the tracking codes and scripts in your WordPress website's header or footer; add, update, reorder, delete, as required.
 
 == Description ==
 
