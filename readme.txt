@@ -3,16 +3,16 @@ Contributors: eltodd, JHipkin
 Donate link: http://red8interactive.com/
 Tags: tracking, analytics, scripts
 Requires at least: 3.0.1
-Tested up to: 3.4
+Tested up to: 3.9.1
 Stable tag: 1.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Add tracking codes, scripts, or any code to the header or footer of the page on your WordPress website.
+Easily manage the tracking codes and scripts you wish to have in your WordPress website's header or footer; add, update, reorder, delete, as required.
 
 == Description ==
 
-Add tracking codes, scripts, or any code to the header or footer of the page on your WordPress website. Easily organize your scripts with the ability to name, order, or deactive them individually.
+Add tracking codes and scripts, or any code to the header or footer of your WordPress website without editing code. Easily manage existing scripts including editing, updating, reordering and deactivating. Tracking Scripts Manager is especially useful for advertising tracking scripts, analytic scripts, and promotional scripts.
 
 == Installation ==
 
@@ -37,7 +37,8 @@ On the "Existing" tab, simply click and drag the script to the new position you 
 == Screenshots ==
 
 1. Add a new Tracking Script to the header and/or footer.
-2. View your current Tracking Scripts or edit them.
+2. View your current Tracking Scripts.
+3. Edit the name and actual code for the script.
 
 == Changelog ==
 
