@@ -3,7 +3,7 @@
 	* Plugin Name: Tracking Script Manager
 	* Plugin URI: http://wordpress.org/plugins/tracking-script-manager/
 	* Description: A plugin that allows you to add tracking scripts to your site.
-	* Version: 1.0.4
+	* Version: 1.0.5
 	* Author: Red8 Interactive
 	* Author URI: http://red8interactive.com
 	* License: GPL2
