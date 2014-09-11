@@ -76,7 +76,7 @@
 				if($header_scripts) {
 					foreach($header_scripts as $script) {
 						if($script->active) {
-							echo iconv('cp1252', 'UTF-8', html_entity_decode(esc_attr($script->script_code), ENT_QUOTES, 'cp1252'));
+							echo html_entity_decode(esc_attr($script->script_code), ENT_QUOTES, 'cp1252');
 						}
 					}
 				}
@@ -88,7 +88,7 @@
 				if($footer_scripts) {
 					foreach($footer_scripts as $script) {
 						if($script->active) {
-							echo iconv('cp1252', 'UTF-8', html_entity_decode(esc_attr($script->script_code), ENT_QUOTES, 'cp1252'));
+							echo html_entity_decode(esc_attr($script->script_code), ENT_QUOTES, 'cp1252');
 						}
 					}
 				}
