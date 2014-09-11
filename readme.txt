@@ -16,7 +16,7 @@ Add tracking codes and scripts, or any code to the header or footer of your Word
 
 == Installation ==
 
-1. Upload the 'tracking-scripts' folder to the '/wp-content/plugins/' directory.
+1. Upload the 'tracking-script-manager' folder to the '/wp-content/plugins/' directory.
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 3. Click on the 'Tracking Scripts' options page.
 
