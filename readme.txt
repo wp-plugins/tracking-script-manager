@@ -4,7 +4,7 @@ Donate link: http://red8interactive.com/
 Tags: tracking, analytics, scripts
 Requires at least: 3.0.1
 Tested up to: 4.0
-Stable tag: 1.0.8
+Stable tag: 1.0.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -42,6 +42,9 @@ On the "Existing" tab, simply click and drag the script to the new position you 
 
 == Changelog ==
 
+= 1.0.9 =
+* Cleaning up script enqueuing
+
 = 1.0.8 =
 * Fixed issues causing some conflicts with WP styling
 
@@ -70,6 +73,9 @@ On the "Existing" tab, simply click and drag the script to the new position you 
 * Initial plugin release
 
 == Upgrade Notice ==
+
+= 1.0.9 =
+Cleaning up script enqueuing
 
 = 1.0.8 =
 Fixed issues causing some conflicts with WP styling
