@@ -3,7 +3,7 @@
 	* Plugin Name: Tracking Script Manager
 	* Plugin URI: http://wordpress.org/plugins/tracking-script-manager/
 	* Description: A plugin that allows you to add tracking scripts to your site.
-	* Version: 1.0.5
+	* Version: 1.0.7
 	* Author: Red8 Interactive
 	* Author URI: http://red8interactive.com
 	* License: GPL2
@@ -41,6 +41,7 @@
 			*/
 			public static function define_constants() {
 				define('TRACKING_SCRIPT_PATH', plugins_url( ' ', __FILE__ ) ); 
+				define('TRACKING_SCRIPT_BASENAME', plugin_basename( __FILE__ ));
 				
 				define('WP_TRACKING_SCRIPTS_OPTION_GROUP', 'tracking_scripts_options' );
 				define('WP_HEADER_TRACKING_SCRIPT', 'header_tracking_script_code' );
@@ -55,8 +56,6 @@
 				add_action('wp_footer', array(__CLASS__, 'find_footer_tracking_codes'));
 				
 				add_action('admin_menu', array(__CLASS__, 'tracking_scripts_create_menu'));
-				
-				add_action('admin_enqueue_scripts', array(__CLASS__, 'tracking_scripts_admin_scripts'));
 				
 				add_action('admin_init', array(__CLASS__, 'initialize_admin_posts'));
 			}
@@ -101,6 +100,7 @@
 			public static function tracking_scripts_create_menu() {
 				add_menu_page('Tracking Scripts', 'Tracking Scripts', 'administrator', __FILE__, array(__CLASS__, 'tracking_options'), '');
 				add_action('admin_init', array(__CLASS__, 'register_tracking_scripts_settings'));
+				add_action('admin_enqueue_scripts', array(__CLASS__, 'tracking_scripts_admin_scripts'));
 			}
 			
 			public static function register_tracking_scripts_settings() {
@@ -115,7 +115,7 @@
 				echo '<h2 class="nav-tab-wrapper">';
 				foreach($tabs as $tab => $name) {
 					$class = ($tab == $current) ? ' nav-tab-active' : '';
-					echo "<a class='nav-tab$class' href='?page=tracking-script-manager/tracking-scripts.php&tab=$tab'>$name</a>";
+					echo "<a class='nav-tab$class' href='?page=".TRACKING_SCRIPT_BASENAME."&tab=$tab'>$name</a>";
 				}
 				echo '</h2>';
 			}
@@ -267,7 +267,7 @@
 					update_option(WP_FOOTER_TRACKING_SCRIPT, serialize($footer_scripts));
 				}
 				
-				wp_redirect(get_admin_url().'admin.php?page=tracking-script-manager/tracking-scripts.php&tab=existing');
+				wp_redirect(get_admin_url().'admin.php?page='.TRACKING_SCRIPT_BASENAME.'&tab=existing');
 				exit();
 			}
 			
@@ -346,7 +346,7 @@
 				update_option(WP_HEADER_TRACKING_SCRIPT, serialize($header_scripts));
 				update_option(WP_FOOTER_TRACKING_SCRIPT, serialize($footer_scripts));
 				
-				wp_redirect(get_admin_url().'admin.php?page=tracking-script-manager/tracking-scripts.php&tab=existing');
+				wp_redirect(get_admin_url().'admin.php?page='.TRACKING_SCRIPT_BASENAME.'&tab=existing');
 				exit();
 			}	
 			
