@@ -3,7 +3,7 @@
 	* Plugin Name: Tracking Script Manager
 	* Plugin URI: http://wordpress.org/plugins/tracking-script-manager/
 	* Description: A plugin that allows you to add tracking scripts to your site.
-	* Version: 1.0.5
+	* Version: 1.0.7
 	* Author: Red8 Interactive
 	* Author URI: http://red8interactive.com
 	* License: GPL2
@@ -41,6 +41,7 @@
 			*/
 			public static function define_constants() {
 				define('TRACKING_SCRIPT_PATH', plugins_url( ' ', __FILE__ ) ); 
+				define('TRACKING_SCRIPT_BASENAME', plugin_basename( __FILE__ ));
 				
 				define('WP_TRACKING_SCRIPTS_OPTION_GROUP', 'tracking_scripts_options' );
 				define('WP_HEADER_TRACKING_SCRIPT', 'header_tracking_script_code' );
@@ -55,8 +56,6 @@
 				add_action('wp_footer', array(__CLASS__, 'find_footer_tracking_codes'));
 				
 				add_action('admin_menu', array(__CLASS__, 'tracking_scripts_create_menu'));
-				
-				add_action('admin_enqueue_scripts', array(__CLASS__, 'tracking_scripts_admin_scripts'));
 				
 				add_action('admin_init', array(__CLASS__, 'initialize_admin_posts'));
 			}
@@ -101,6 +100,7 @@
 			public static function tracking_scripts_create_menu() {
 				add_menu_page('Tracking Scripts', 'Tracking Scripts', 'administrator', __FILE__, array(__CLASS__, 'tracking_options'), '');
 				add_action('admin_init', array(__CLASS__, 'register_tracking_scripts_settings'));
+				add_action('admin_enqueue_scripts', array(__CLASS__, 'tracking_scripts_admin_scripts'));
 			}
 			
 			public static function register_tracking_scripts_settings() {
@@ -115,7 +115,7 @@
 				echo '<h2 class="nav-tab-wrapper">';
 				foreach($tabs as $tab => $name) {
 					$class = ($tab == $current) ? ' nav-tab-active' : '';
-					echo "<a class='nav-tab$class' href='?page=tracking-script-manager/tracking-scripts.php&tab=$tab'>$name</a>";
+					echo "<a class='nav-tab$class' href='?page=".TRACKING_SCRIPT_BASENAME."&tab=$tab'>$name</a>";
 				}
 				echo '</h2>';
 			}
@@ -160,44 +160,48 @@
 						        <h2>Header Scripts</h2>
 						        <?php $header_scripts = unserialize(get_option(WP_HEADER_TRACKING_SCRIPT)); $i = 1; ?>
 						        <div class="tracking_scripts">
-						        	<?php foreach($header_scripts as $script) { ?>
-						        	<div class="tracking_script">
-						        		<i class="fa fa-sort" title="Drag to Sort"></i>
-						        		<p><?php echo $i; ?></p>
-						        		<div class="script_info">
-						        			<input type="text" name="header_script_<?php echo $i; ?>_name" value="<?php echo $script->script_name; ?>" readonly="readonly">
-											<input type="text" name="header_script_<?php echo $i; ?>_code" value="<?php echo $script->script_code; ?>" readonly="readonly">
-						        		</div>
-						        		<i class="active_tracking fa <?php if($script->active === true) { echo 'fa-check-circle'; } else { echo 'fa-circle-o'; } ?>" title="<?php if($script->active === true) { echo 'Deactivate Script'; } else { echo 'Activate Script'; } ?>"></i>
-						        		<i class="edit_tracking fa fa-edit" title="Edit Script"></i>
-						        		<i class="delete_tracking fa fa-times" title="Delete Script"></i>
-						        		<input type="hidden" class="script_order" name="header_script_<?php echo $i; ?>_order" value="<?php echo $i; ?>">
-						        		<input type="hidden" class="script_active" name="header_script_<?php echo $i; ?>_active" value="<?php if($script->active === true) { echo 'true'; } else { echo 'false'; } ?>">
-						        		<input type="hidden" class="script_exists" name="header_script_<?php echo $i; ?>_exists" value="true">
-						        	</div>
-						        	<?php $i++; } ?>
+							        <?php if($header_scripts) { ?>
+							        	<?php foreach($header_scripts as $script) { ?>
+							        	<div class="tracking_script">
+							        		<i class="fa fa-sort" title="Drag to Sort"></i>
+							        		<p><?php echo $i; ?></p>
+							        		<div class="script_info">
+							        			<input type="text" name="header_script_<?php echo $i; ?>_name" value="<?php echo $script->script_name; ?>" readonly="readonly">
+												<input type="text" name="header_script_<?php echo $i; ?>_code" value="<?php echo $script->script_code; ?>" readonly="readonly">
+							        		</div>
+							        		<i class="active_tracking fa <?php if($script->active === true) { echo 'fa-check-circle'; } else { echo 'fa-circle-o'; } ?>" title="<?php if($script->active === true) { echo 'Deactivate Script'; } else { echo 'Activate Script'; } ?>"></i>
+							        		<i class="edit_tracking fa fa-edit" title="Edit Script"></i>
+							        		<i class="delete_tracking fa fa-times" title="Delete Script"></i>
+							        		<input type="hidden" class="script_order" name="header_script_<?php echo $i; ?>_order" value="<?php echo $i; ?>">
+							        		<input type="hidden" class="script_active" name="header_script_<?php echo $i; ?>_active" value="<?php if($script->active === true) { echo 'true'; } else { echo 'false'; } ?>">
+							        		<input type="hidden" class="script_exists" name="header_script_<?php echo $i; ?>_exists" value="true">
+							        	</div>
+							        	<?php $i++; } ?>
+						        	<?php } ?>
 						        </div>
 						    </div>
 						    <div class="script_section">
 						        <h2>Footer Scripts</h2>
 						        <?php $footer_scripts = unserialize(get_option(WP_FOOTER_TRACKING_SCRIPT)); $i = 1; ?>
 						        <div class="tracking_scripts">
-						        	<?php foreach($footer_scripts as $script) { ?>
-						        	<div class="tracking_script">
-						        		<i class="fa fa-sort" title="Drag to Sort"></i>
-						        		<p><?php echo $i; ?></p>
-						        		<div class="script_info">
-						        			<input type="text" name="footer_script_<?php echo $i; ?>_name" value="<?php echo $script->script_name; ?>" readonly="readonly">
-											<input type="text" name="footer_script_<?php echo $i; ?>_code" value="<?php echo $script->script_code; ?>" readonly="readonly">
-						        		</div>
-						        		<i class="active_tracking fa <?php if($script->active === true) { echo 'fa-check-circle'; } else { echo 'fa-circle-o'; } ?>" title="<?php if($script->active === true) { echo 'Deactivate Script'; } else { echo 'Activate Script'; } ?>"></i>
-						        		<i class="edit_tracking fa fa-edit" title="Edit Script"></i>
-						        		<i class="delete_tracking fa fa-times" title="Delete Script"></i>
-						        		<input type="hidden" class="script_order" name="footer_script_<?php echo $i; ?>_order" value="<?php echo $i; ?>">
-						        		<input type="hidden" class="script_active" name="footer_script_<?php echo $i; ?>_active" value="<?php if($script->active === true) { echo 'true'; } else { echo 'false'; } ?>">
-						        		<input type="hidden" class="script_exists" name="footer_script_<?php echo $i; ?>_exists" value="true">
-						        	</div>
-						        	<?php $i++; } ?>
+							        <?php if($footer_scripts) { ?>
+							        	<?php foreach($footer_scripts as $script) { ?>
+							        	<div class="tracking_script">
+							        		<i class="fa fa-sort" title="Drag to Sort"></i>
+							        		<p><?php echo $i; ?></p>
+							        		<div class="script_info">
+							        			<input type="text" name="footer_script_<?php echo $i; ?>_name" value="<?php echo $script->script_name; ?>" readonly="readonly">
+												<input type="text" name="footer_script_<?php echo $i; ?>_code" value="<?php echo $script->script_code; ?>" readonly="readonly">
+							        		</div>
+							        		<i class="active_tracking fa <?php if($script->active === true) { echo 'fa-check-circle'; } else { echo 'fa-circle-o'; } ?>" title="<?php if($script->active === true) { echo 'Deactivate Script'; } else { echo 'Activate Script'; } ?>"></i>
+							        		<i class="edit_tracking fa fa-edit" title="Edit Script"></i>
+							        		<i class="delete_tracking fa fa-times" title="Delete Script"></i>
+							        		<input type="hidden" class="script_order" name="footer_script_<?php echo $i; ?>_order" value="<?php echo $i; ?>">
+							        		<input type="hidden" class="script_active" name="footer_script_<?php echo $i; ?>_active" value="<?php if($script->active === true) { echo 'true'; } else { echo 'false'; } ?>">
+							        		<input type="hidden" class="script_exists" name="footer_script_<?php echo $i; ?>_exists" value="true">
+							        	</div>
+							        	<?php $i++; } ?>
+						        	<?php } ?>
 						        </div>
 						    </div>
 						    <?php submit_button('Update Scripts', 'primary', 'update_tracking_codes'); ?>
@@ -263,7 +267,7 @@
 					update_option(WP_FOOTER_TRACKING_SCRIPT, serialize($footer_scripts));
 				}
 				
-				wp_redirect(get_admin_url().'admin.php?page=tracking-script-manager/tracking-scripts.php&tab=existing');
+				wp_redirect(get_admin_url().'admin.php?page='.TRACKING_SCRIPT_BASENAME.'&tab=existing');
 				exit();
 			}
 			
@@ -272,63 +276,67 @@
 				$footer_scripts = unserialize(get_option(WP_FOOTER_TRACKING_SCRIPT));
 				
 				$i = 1;
-				foreach($header_scripts as $script) {
-					if($_POST['header_script_'.$i.'_name']) {
-						$script->script_name = sanitize_text_field($_POST['header_script_'.$i.'_name']);
-					}
-					if($_POST['header_script_'.$i.'_code']) {
-						$script->script_code = stripslashes(esc_textarea($_POST['header_script_'.$i.'_code']));
-					}
-					if($_POST['header_script_'.$i.'_active']) {
-						if($_POST['header_script_'.$i.'_active'] === 'false') {
-							$script->active = false;
-						} else {
-							$script->active = true;
+				if($header_scripts) {
+					foreach($header_scripts as $script) {
+						if($_POST['header_script_'.$i.'_name']) {
+							$script->script_name = sanitize_text_field($_POST['header_script_'.$i.'_name']);
 						}
-					}
-					if($_POST['header_script_'.$i.'_order']) {
-						$order = filter_input(INPUT_POST, 'header_script_'.$i.'_order', FILTER_VALIDATE_INT);
-						if(is_int($order)) { 
-							$script->order = $order;
+						if($_POST['header_script_'.$i.'_code']) {
+							$script->script_code = stripslashes(esc_textarea($_POST['header_script_'.$i.'_code']));
 						}
-					}
-					if($_POST['header_script_'.$i.'_exists']) {
-						if($_POST['header_script_'.$i.'_exists'] === 'false') {
-							unset($header_scripts[$i-1]);
+						if($_POST['header_script_'.$i.'_active']) {
+							if($_POST['header_script_'.$i.'_active'] === 'false') {
+								$script->active = false;
+							} else {
+								$script->active = true;
+							}
 						}
+						if($_POST['header_script_'.$i.'_order']) {
+							$order = filter_input(INPUT_POST, 'header_script_'.$i.'_order', FILTER_VALIDATE_INT);
+							if(is_int($order)) { 
+								$script->order = $order;
+							}
+						}
+						if($_POST['header_script_'.$i.'_exists']) {
+							if($_POST['header_script_'.$i.'_exists'] === 'false') {
+								unset($header_scripts[$i-1]);
+							}
+						}
+						
+						$i++;
 					}
-					
-					$i++;
 				}
 				
 				$i = 1;
-				foreach($footer_scripts as $script) {
-					if($_POST['footer_script_'.$i.'_name']) {
-						$script->script_name = sanitize_text_field($_POST['footer_script_'.$i.'_name']);
-					}
-					if($_POST['footer_script_'.$i.'_code']) {
-						$script->script_code = stripslashes(esc_textarea($_POST['footer_script_'.$i.'_code']));
-					}
-					if($_POST['footer_script_'.$i.'_active']) {
-						if($_POST['footer_script_'.$i.'_active'] === 'false') {
-							$script->active = false;
-						} else {
-							$script->active = true;
+				if($footer_scripts) {
+					foreach($footer_scripts as $script) {
+						if($_POST['footer_script_'.$i.'_name']) {
+							$script->script_name = sanitize_text_field($_POST['footer_script_'.$i.'_name']);
 						}
-					}
-					if($_POST['footer_script_'.$i.'_order']) {
-						$order = filter_input(INPUT_POST, 'footer_script_'.$i.'_order', FILTER_VALIDATE_INT);
-						if(is_int($order)) { 
-							$script->order = $order;
+						if($_POST['footer_script_'.$i.'_code']) {
+							$script->script_code = stripslashes(esc_textarea($_POST['footer_script_'.$i.'_code']));
 						}
-					}
-					if($_POST['footer_script_'.$i.'_exists']) {
-						if($_POST['footer_script_'.$i.'_exists'] === 'false') {
-							unset($footer_scripts[$i-1]);
+						if($_POST['footer_script_'.$i.'_active']) {
+							if($_POST['footer_script_'.$i.'_active'] === 'false') {
+								$script->active = false;
+							} else {
+								$script->active = true;
+							}
 						}
+						if($_POST['footer_script_'.$i.'_order']) {
+							$order = filter_input(INPUT_POST, 'footer_script_'.$i.'_order', FILTER_VALIDATE_INT);
+							if(is_int($order)) { 
+								$script->order = $order;
+							}
+						}
+						if($_POST['footer_script_'.$i.'_exists']) {
+							if($_POST['footer_script_'.$i.'_exists'] === 'false') {
+								unset($footer_scripts[$i-1]);
+							}
+						}
+						
+						$i++;
 					}
-					
-					$i++;
 				}
 				
 				usort($header_scripts, array(__CLASS__, 'compare_order'));
@@ -338,7 +346,7 @@
 				update_option(WP_HEADER_TRACKING_SCRIPT, serialize($header_scripts));
 				update_option(WP_FOOTER_TRACKING_SCRIPT, serialize($footer_scripts));
 				
-				wp_redirect(get_admin_url().'admin.php?page=tracking-script-manager/tracking-scripts.php&tab=existing');
+				wp_redirect(get_admin_url().'admin.php?page='.TRACKING_SCRIPT_BASENAME.'&tab=existing');
 				exit();
 			}	
 			
