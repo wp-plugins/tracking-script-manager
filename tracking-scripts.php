@@ -3,7 +3,7 @@
 	* Plugin Name: Tracking Script Manager
 	* Plugin URI: http://wordpress.org/plugins/tracking-script-manager/
 	* Description: A plugin that allows you to add tracking scripts to your site.
-	* Version: 1.0.7
+	* Version: 1.0.8
 	* Author: Red8 Interactive
 	* Author URI: http://red8interactive.com
 	* License: GPL2
@@ -110,7 +110,6 @@
 			
 			public static function tracking_scripts_admin_tabs( $current = 'add_new' ) {
 				$tabs = array('add_new' => 'Add New', 'existing' => 'Existing');
-				echo '<div id="tracking_scripts_admin"><br></div>';
 				echo '<h2 style="font-size: 22px; font-weight: bold; margin: 10px 0 40px;">Tracking Scripts</h2>';
 				echo '<h2 class="nav-tab-wrapper">';
 				foreach($tabs as $tab => $name) {
@@ -221,8 +220,6 @@
 				wp_enqueue_style('tracking-scripts-main');
 				
 				wp_enqueue_script( 'tracking_script_js', plugin_dir_url(__FILE__) . '/js/main.js', array(), '', true );
-				
-				
 			}
 			
 			
