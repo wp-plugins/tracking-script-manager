@@ -1,3 +1,8 @@
+<?php 
+	if ( ! defined( 'ABSPATH' ) ) { 
+    	exit; // Exit if accessed directly
+	}
+?>
 <div class="script_section">
 <h2>Header Scripts</h2>
 <?php $header_scripts = unserialize(get_option(WP_HEADER_TRACKING_SCRIPT)); $i = 1; ?>

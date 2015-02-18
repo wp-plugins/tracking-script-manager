@@ -1,3 +1,8 @@
+<?php 
+	if ( ! defined( 'ABSPATH' ) ) { 
+    	exit; // Exit if accessed directly
+	}
+?>
 <div class="script_section">
 <h2>Page/Post Scripts</h2>
 <?php $page_scripts = unserialize(get_option(WP_PAGE_TRACKING_SCRIPT)); $i = 1; ?>

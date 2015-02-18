@@ -1,3 +1,8 @@
+<?php 
+	if ( ! defined( 'ABSPATH' ) ) { 
+    	exit; // Exit if accessed directly
+	}
+?>
 <div class="add_new_section script_section">
 	<div id="add_page_tracking_script_location" class="add_tracking_scripts add_tracking_scripts_row">
     	<label for="<?php echo WP_NEW_PAGE_TRACKING_SCRIPT_LOCATION; ?>">Identify the location where the tracking script should appear:</label>
