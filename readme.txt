@@ -4,7 +4,7 @@ Donate link: http://red8interactive.com/
 Tags: tracking, analytics, scripts
 Requires at least: 3.0.1
 Tested up to: 4.1
-Stable tag: 1.1
+Stable tag: 1.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -43,6 +43,9 @@ On either the "Global" or "Specific Location" tabs, simply click and drag the sc
 
 == Changelog ==
 
+= 1.1.1 =
+* Fixed a few PHP warnings from last update
+
 = 1.1 =
 * Major Upgrade: Allows for scripts to be added to a specific page
 
@@ -77,6 +80,9 @@ On either the "Global" or "Specific Location" tabs, simply click and drag the sc
 * Initial plugin release
 
 == Upgrade Notice ==
+
+= 1.1.1 =
+Fixed a few PHP warnings from last update
 
 = 1.1 =
 Major Upgrade: Allows for scripts to be added to a specific page
