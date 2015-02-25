@@ -3,7 +3,7 @@
 	* Plugin Name: Tracking Script Manager
 	* Plugin URI: http://wordpress.org/plugins/tracking-script-manager/
 	* Description: A plugin that allows you to add tracking scripts to your site.
-	* Version: 1.1
+	* Version: 1.1.1
 	* Author: Red8 Interactive
 	* Author URI: http://red8interactive.com
 	* License: GPL2
@@ -241,8 +241,8 @@
 				?>				
 					<div id="tracking_scripts_<?php echo $current_page_id; ?>" class="tracking_scripts">
 			        	<?php 
-			        		$page_header_scripts = $page_scripts_array['header'];
-			        		$page_footer_scripts = $page_scripts_array['footer'];
+			        		$page_header_scripts = (array_key_exists('header', $page_scripts_array)) ? $page_scripts_array['header'] : null;
+			        		$page_footer_scripts = (array_key_exists('footer', $page_scripts_array)) ? $page_scripts_array['footer'] : null;
 			        	?>
 			        	<h3>Header</h3>
 			        	<?php if($page_header_scripts) { ?>
@@ -387,26 +387,26 @@
 				
 				$i = 1;
 				foreach($header_scripts as $script) {
-					if($_POST['header_script_'.$i.'_name']) {
+					if(isset($_POST['header_script_'.$i.'_name'])) {
 						$script->script_name = sanitize_text_field($_POST['header_script_'.$i.'_name']);
 					}
-					if($_POST['header_script_'.$i.'_code']) {
+					if(isset($_POST['header_script_'.$i.'_code'])) {
 						$script->script_code = stripslashes(esc_textarea($_POST['header_script_'.$i.'_code']));
 					}
-					if($_POST['header_script_'.$i.'_active']) {
+					if(isset($_POST['header_script_'.$i.'_active'])) {
 						if($_POST['header_script_'.$i.'_active'] === 'false') {
 							$script->active = false;
 						} else {
 							$script->active = true;
 						}
 					}
-					if($_POST['header_script_'.$i.'_order']) {
+					if(isset($_POST['header_script_'.$i.'_order'])) {
 						$order = filter_input(INPUT_POST, 'header_script_'.$i.'_order', FILTER_VALIDATE_INT);
 						if(is_int($order)) { 
 							$script->order = $order;
 						}
 					}
-					if($_POST['header_script_'.$i.'_exists']) {
+					if(isset($_POST['header_script_'.$i.'_exists'])) {
 						if($_POST['header_script_'.$i.'_exists'] === 'false') {
 							unset($header_scripts[$i-1]);
 						}
@@ -417,26 +417,26 @@
 				
 				$i = 1;
 				foreach($footer_scripts as $script) {
-					if($_POST['footer_script_'.$i.'_name']) {
+					if(isset($_POST['footer_script_'.$i.'_name'])) {
 						$script->script_name = sanitize_text_field($_POST['footer_script_'.$i.'_name']);
 					}
-					if($_POST['footer_script_'.$i.'_code']) {
+					if(isset($_POST['footer_script_'.$i.'_code'])) {
 						$script->script_code = stripslashes(esc_textarea($_POST['footer_script_'.$i.'_code']));
 					}
-					if($_POST['footer_script_'.$i.'_active']) {
+					if(isset($_POST['footer_script_'.$i.'_active'])) {
 						if($_POST['footer_script_'.$i.'_active'] === 'false') {
 							$script->active = false;
 						} else {
 							$script->active = true;
 						}
 					}
-					if($_POST['footer_script_'.$i.'_order']) {
+					if(isset($_POST['footer_script_'.$i.'_order'])) {
 						$order = filter_input(INPUT_POST, 'footer_script_'.$i.'_order', FILTER_VALIDATE_INT);
 						if(is_int($order)) { 
 							$script->order = $order;
 						}
 					}
-					if($_POST['footer_script_'.$i.'_exists']) {
+					if(isset($_POST['footer_script_'.$i.'_exists'])) {
 						if($_POST['footer_script_'.$i.'_exists'] === 'false') {
 							unset($footer_scripts[$i-1]);
 						}
@@ -464,26 +464,26 @@
 				$index = 0;
 				foreach($page_scripts as $script) {
 					$script_id = $script->script_id;
-					if($_POST['page_script_'.$script_id.'_name']) {
+					if(isset($_POST['page_script_'.$script_id.'_name'])) {
 						$script->script_name = sanitize_text_field($_POST['page_script_'.$script_id.'_name']);
 					}
-					if($_POST['page_script_'.$script_id.'_code']) {
+					if(isset($_POST['page_script_'.$script_id.'_code'])) {
 						$script->script_code = stripslashes(esc_textarea($_POST['page_script_'.$script_id.'_code']));
 					}
-					if($_POST['page_script_'.$script_id.'_active']) {
+					if(isset($_POST['page_script_'.$script_id.'_active'])) {
 						if($_POST['page_script_'.$script_id.'_active'] === 'false') {
 							$script->active = false;
 						} else {
 							$script->active = true;
 						}
 					}
-					if($_POST['page_script_'.$script_id.'_order']) {
+					if(isset($_POST['page_script_'.$script_id.'_order'])) {
 						$order = filter_input(INPUT_POST, 'page_script_'.$script_id.'_order', FILTER_VALIDATE_INT);
 						if(is_int($order)) { 
 							$script->order = $order;
 						}
 					}
-					if($_POST['page_script_'.$script_id.'_exists']) {
+					if(isset($_POST['page_script_'.$script_id.'_exists'])) {
 						if($_POST['page_script_'.$script_id.'_exists'] === 'false') {
 							unset($page_scripts[$index]);
 						}
