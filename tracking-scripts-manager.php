@@ -3,7 +3,7 @@
 	* Plugin Name: Tracking Script Manager
 	* Plugin URI: http://wordpress.org/plugins/tracking-script-manager/
 	* Description: A plugin that allows you to add tracking scripts to your site.
-	* Version: 1.1.1
+	* Version: 1.1.2
 	* Author: Red8 Interactive
 	* Author URI: http://red8interactive.com
 	* License: GPL2
@@ -70,10 +70,8 @@
 				add_action('admin_init', array(__CLASS__, 'initialize_admin_posts'));
 
 				add_action( 'wp_ajax_tracking_scripts_get_posts', array(__CLASS__, 'tracking_scripts_posts_ajax_handler') );
-				add_action( 'wp_ajax_nopriv_tracking_scripts_get_posts', array(__CLASS__, 'tracking_scripts_posts_ajax_handler') );
 				
 				add_action( 'wp_ajax_tracking_scripts_get_post_content', array(__CLASS__, 'tracking_scripts_post_content_ajax_handler') );
-				add_action( 'wp_ajax_nopriv_tracking_scripts_get_posts', array(__CLASS__, 'tracking_scripts_posts_ajax_handler') );
 			}
 	
 			/*************************************************
@@ -299,13 +297,8 @@
 			// Admin Hooks
 			public static function initialize_admin_posts() {
 				add_action('admin_post_save_new_tracking_codes', array(__CLASS__, 'save_new_tracking_codes')); // If the user is logged in
-				add_action('admin_post_nopriv_save_new_tracking_codes', array(__CLASS__, 'save_new_tracking_codes')); // If the user in not logged in
-				
 				add_action('admin_post_update_tracking_codes', array(__CLASS__, 'update_tracking_codes')); // If the user is logged in
-				add_action('admin_post_nopriv_update_tracking_codes', array(__CLASS__, 'update_tracking_codes')); // If the user in not logged in
-			
 				add_action('admin_post_update_page_tracking_codes', array(__CLASS__, 'update_page_tracking_codes')); // If the user is logged in
-				add_action('admin_post_nopriv_update_page_tracking_codes', array(__CLASS__, 'update_page_tracking_codes')); // If the user in not logged in
 			}
 			
 			
