@@ -4,7 +4,7 @@ Donate link: http://red8interactive.com/
 Tags: tracking, analytics, scripts
 Requires at least: 3.0.1
 Tested up to: 4.1
-Stable tag: 1.1.3
+Stable tag: 1.1.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -42,6 +42,9 @@ On either the "Global" or "Specific Location" tabs, simply click and drag the sc
 4. View your page-specific Tracking Scripts.
 
 == Changelog ==
+
+= 1.1.4 =
+* Another admin menu tweak
 
 = 1.1.3 =
 * Admin menu tweak
@@ -86,6 +89,9 @@ On either the "Global" or "Specific Location" tabs, simply click and drag the sc
 * Initial plugin release
 
 == Upgrade Notice ==
+
+= 1.1.4 =
+Another admin menu tweak
 
 = 1.1.3 =
 Admin menu tweak
