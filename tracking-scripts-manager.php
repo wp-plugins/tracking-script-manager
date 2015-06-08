@@ -134,7 +134,7 @@
 			**************************************************/
 			
 			public static function tracking_scripts_create_menu() {
-				add_menu_page('Tracking Scripts Manager', 'Tracking Scripts Manager', 'administrator', __FILE__, array(__CLASS__, 'tracking_options'), '');
+				add_menu_page('Tracking Scripts Manager', 'Tracking Scripts Manager', 'activate_plugins', __FILE__, array(__CLASS__, 'tracking_options'), '');
 				add_action('admin_init', array(__CLASS__, 'register_tracking_scripts_settings'));
 			}
 			
