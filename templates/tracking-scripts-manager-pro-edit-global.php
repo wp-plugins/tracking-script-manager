@@ -4,7 +4,7 @@
 	}
 ?>
 <div class="script_section">
-<h2>Header Scripts</h2>
+<h2><?php _e( 'Header Scripts', TRACKING_SCRIPT_TEXTDOMAIN ); ?></h2>
 <?php $header_scripts = unserialize(get_option(WP_HEADER_TRACKING_SCRIPT)); $i = 1; ?>
 <div class="tracking_scripts">
 	<?php if($header_scripts) { ?>
@@ -30,7 +30,7 @@
 </div>
 </div>
 <div class="script_section">
-<h2>Footer Scripts</h2>
+<h2><?php _e( 'Footer Scripts', TRACKING_SCRIPT_TEXTDOMAIN ); ?></h2>
 <?php $footer_scripts = unserialize(get_option(WP_FOOTER_TRACKING_SCRIPT)); $i = 1; ?>
 <div class="tracking_scripts">
 	<?php if($footer_scripts) { ?>
