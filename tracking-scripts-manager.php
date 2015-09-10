@@ -3,7 +3,7 @@
 	* Plugin Name: Tracking Script Manager
 	* Plugin URI: http://wordpress.org/plugins/tracking-script-manager/
 	* Description: A plugin that allows you to add tracking scripts to your site.
-	* Version: 1.1.4
+	* Version: 1.1.6
 	* Author: Red8 Interactive
 	* Author URI: http://red8interactive.com
 	* License: GPL2
@@ -46,6 +46,7 @@
 			public static function define_constants() {
 				define('TRACKING_SCRIPT_PATH', plugins_url( ' ', __FILE__ ) ); 
 				define('TRACKING_SCRIPT_BASENAME', plugin_basename( __FILE__ ));
+				define('TRACKING_SCRIPT_TEXTDOMAIN', 'tracking-scripts-manager');
 				
 				define('WP_TRACKING_SCRIPTS_OPTION_GROUP', 'tracking_scripts_options' );
 				define('WP_HEADER_TRACKING_SCRIPT', 'header_tracking_script_code' );
@@ -134,7 +135,7 @@
 			**************************************************/
 			
 			public static function tracking_scripts_create_menu() {
-				add_menu_page('Tracking Scripts Manager', 'Tracking Scripts Manager', 'manage_options', __FILE__, array(__CLASS__, 'tracking_options'), '');
+				add_menu_page('Tracking Script Manager', 'Tracking Script Manager', 'manage_options', __FILE__, array(__CLASS__, 'tracking_options'), '');
 				add_action('admin_init', array(__CLASS__, 'register_tracking_scripts_settings'));
 			}
 			
@@ -145,30 +146,31 @@
 			
 			public static function tracking_scripts_admin_tabs( $current = 'add_new' ) {
 				$tabs = array('add_new' => 'Add New', 'global' => 'Global', 'pages' => 'Specific Location');
-				echo '<h2 style="font-size: 22px; font-weight: bold; margin: 10px 0 40px;">Tracking Scripts Manager</h2>';
-				echo '<h2 class="nav-tab-wrapper">';
+				?><h2><?php _e( 'Tracking Script Manager', TRACKING_SCRIPT_TEXTDOMAIN ); ?></h2>
+				<h2 class="nav-tab-wrapper"><?php
 				foreach($tabs as $tab => $name) {
 					$class = ($tab == $current) ? ' nav-tab-active' : '';
-					echo "<a class='nav-tab$class' href='?page=".TRACKING_SCRIPT_BASENAME."&tab=$tab'>$name</a>";
+					?><a class="nav-tab<?php echo $class; ?>" href="?page=<?php echo TRACKING_SCRIPT_BASENAME; ?>&tab=<?php echo $tab; ?>"><?php _e( $name, TRACKING_SCRIPT_TEXTDOMAIN ); ?></a><?php
 				}
-				echo '</h2>';
+				?></h2><?php
 			}
 			
 			public static function tracking_options() {
 				self::tracking_scripts_admin_scripts();
-				
-				global $pagenow;
-				$settings = get_option('tracking_scripts_settings');
-				
-				if(isset($_GET['tab'])) {
-					self::tracking_scripts_admin_tabs($_GET['tab']);
-					$pagenow = $_GET['tab']; 
-				} else {
-					self::tracking_scripts_admin_tabs('add_new'); 
-					$pagenow = 'add_new';
-				}
 				?>
 				<div class="wrap tracking_scripts_wrap">
+				<?php 
+					global $pagenow;
+					$settings = get_option('tracking_scripts_settings');
+					
+					if(isset($_GET['tab'])) {
+						self::tracking_scripts_admin_tabs($_GET['tab']);
+						$pagenow = $_GET['tab']; 
+					} else {
+						self::tracking_scripts_admin_tabs('add_new'); 
+						$pagenow = 'add_new';
+					}
+				?>
 					<form method="post" action="<?php echo get_admin_url(); ?>admin-post.php">
 						<?php settings_fields(WP_TRACKING_SCRIPTS_OPTION_GROUP); ?>
 						<?php do_settings_sections(WP_TRACKING_SCRIPTS_OPTION_GROUP); ?>
@@ -242,7 +244,7 @@
 			        		$page_header_scripts = (array_key_exists('header', $page_scripts_array)) ? $page_scripts_array['header'] : null;
 			        		$page_footer_scripts = (array_key_exists('footer', $page_scripts_array)) ? $page_scripts_array['footer'] : null;
 			        	?>
-			        	<h3>Header</h3>
+			        	<h3><?php _e( 'Header', TRACKING_SCRIPT_TEXTDOMAIN ); ?></h3>
 			        	<?php if($page_header_scripts) { ?>
 			        		<ul class="tracking_script_list">
 				        	<?php $i = 1; ?>
@@ -265,7 +267,7 @@
 							<?php } ?>
 			        		</ul>
 						<?php } ?>
-			        	<h3>Footer</h3>
+			        	<h3><?php _e( 'Footer', TRACKING_SCRIPT_TEXTDOMAIN ); ?></h3>
 			        	<?php if($page_footer_scripts) { ?>
 			        		<ul class="tracking_script_list">
 				        	<?php foreach($page_footer_scripts as $script) { ?>

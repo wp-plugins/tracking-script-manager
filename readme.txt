@@ -1,18 +1,22 @@
-=== Tracking Scripts Manager ===
+=== Tracking Script Manager ===
 Contributors: eltodd, JHipkin
 Donate link: http://red8interactive.com/
-Tags: tracking, analytics, scripts
+Tags: adwords remarketing, adwords tracking, analytics, analytics conversion tracking, conversion pixel, conversion tracking, conversion pixel tracking, conversion tracking adwords, conversion tracking pixel, scripts, conversion tracking script, easy digital downloads, edd, Facebook Ads, facebook conversion pixel, facebook custom audience, facebook retargeting, google adwords, google analytics, google analytics web tracking code, google recaptcha, recaptcha, google recaptcha snippet, google tag manager, Marketo tracking scripts, Marketo code, Hubspot tracking scripts, Hubspot code, Pardot tracking scripts, Pardo tracking codes, Eloqua tracking scripts, Eloqua code, html snippet, html snippets, html tracking code, javascript snippet, javascript snippets, js snippets, pay per click tracking, pixel tracking code, remarketing, remarketing scripts, remarketing code, retargeting, retargeting scripts, retargeting code, snippets, Tag Management, track conversion, track conversions, tracking code, tracking codes, tracking script, woocommerce, wp e-commerce, wp ecommerce
 Requires at least: 3.0.1
-Tested up to: 4.1
-Stable tag: 1.1.4
+Tested up to: 4.3
+Stable tag: 1.1.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Easily manage the tracking codes and scripts in your WordPress website's header or footer; add, update, reorder, delete, as required.
+Easy tag management. Manage the tracking tags, codes and scripts you use in your WordPress site; easily add, update, reorder, delete, as required.
 
 == Description ==
 
-Add tracking codes and scripts, or any code to the header, footer or specific page of your WordPress website without editing code. Easily manage existing scripts including editing, updating, reordering and deactivating. Tracking Scripts Manager is especially useful for advertising tracking scripts, analytic scripts, and promotional scripts.
+With Tracking Script Manager you can place tracking tags and scripts globally in the header or footer or specifically on specific pages and posts. 
+
+Easily add tags, scripts and code, or manage existing tags, scripts and code including editing, updating, reordering and deactivating. 
+
+Tracking Script Manager is especially useful for managing advertising tags, social media tracking and retargeting scripts, Facebook and adwords for example, analytic scripts including Google Analytics, and promotional scripts. It can also be used to manage conversion tracking tags and scripts for marketing automation or ecommerce or any other desired action.
 
 == Installation ==
 
@@ -42,6 +46,12 @@ On either the "Global" or "Specific Location" tabs, simply click and drag the sc
 4. View your page-specific Tracking Scripts.
 
 == Changelog ==
+
+= 1.1.6 =
+* Adding in ability for text translations
+
+= 1.1.5 =
+* Updating wording throughout the plugin for better continuity
 
 = 1.1.4 =
 * Another admin menu tweak
@@ -89,6 +99,12 @@ On either the "Global" or "Specific Location" tabs, simply click and drag the sc
 * Initial plugin release
 
 == Upgrade Notice ==
+
+= 1.1.6 =
+Adding in ability for text translations
+
+= 1.1.5 =
+Updating wording throughout the plugin for better continuity
 
 = 1.1.4 =
 Another admin menu tweak

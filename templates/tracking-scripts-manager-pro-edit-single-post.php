@@ -4,7 +4,7 @@
 	}
 ?>
 <div class="script_section">
-<h2>Page/Post Scripts</h2>
+<h2><?php _e( 'Page/Post Scripts', TRACKING_SCRIPT_TEXTDOMAIN ); ?></h2>
 <?php $page_scripts = unserialize(get_option(WP_PAGE_TRACKING_SCRIPT)); $i = 1; ?>
 <?php
 	$page_scripts_array = array();
@@ -16,7 +16,7 @@
 ?>
 <div class="tracking_scripts_page_right_side">
 	<select id="tracking_script_single_page">
-		<option value="none">Choose Page/Post</option>
+		<option value="none"><?php _e( 'Choose Page/Post', TRACKING_SCRIPT_TEXTDOMAIN ); ?></option>
 		<?php if($page_scripts_array) { ?>
 			<?php foreach($page_scripts_array as $page => $scripts) { ?>
 				<?php $script_page = get_post($page); ?>
